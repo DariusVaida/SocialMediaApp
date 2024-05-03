@@ -1,11 +1,14 @@
 package org.example.spring1.item;
 
-import static org.example.spring1.UrlMapping.ITEMS;
-
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.example.spring1.item.model.Item;
+import org.example.spring1.global.SingleBodyRequestDTO;
+import org.example.spring1.item.model.dto.ItemDTO;
+import org.example.spring1.item.model.dto.ItemRequestDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.example.spring1.UrlMapping.*;
 
 @RestController
 @RequestMapping(ITEMS)
@@ -15,7 +18,31 @@ public class ItemController {
   private final ItemService itemService;
 
   @GetMapping
-  public List<Item> findAll() {
+  public List<ItemDTO> findAll() {
     return itemService.findAll();
   }
-}
+  @PostMapping
+  public ItemDTO create(@RequestBody ItemRequestDTO dto) {
+    return itemService.create(dto);
+  }
+
+  @DeleteMapping(ID_PART)
+  public void delete(@PathVariable Long id) {
+    itemService.delete(id);
+  }
+
+  @DeleteMapping
+  public void deleteMultiple(@RequestParam List<Long> ids) {
+    itemService.deleteMultiple(ids);
+  }
+
+  @PutMapping(ID_PART)
+  public ItemDTO update(@PathVariable Long id, @RequestBody ItemRequestDTO dto) {
+    return itemService.update(id, dto);
+  }
+
+  @PatchMapping(ID_PART + CHANGE_NAME_PART)
+  public ItemDTO changeName(@PathVariable Long id, @RequestBody SingleBodyRequestDTO<String> dto) {
+    return itemService.changeName(id, dto.getBody());
+  }
+  }

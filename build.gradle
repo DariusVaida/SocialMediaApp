@@ -30,6 +30,10 @@ dependencies {
 
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     runtimeOnly 'mysql:mysql-connector-java:8.0.28'
@@ -40,6 +44,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     compileOnly 'javax.xml.bind:jaxb-api:2.3.0'
+    testImplementation 'javax.xml.bind:jaxb-api:2.3.0'
 
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'

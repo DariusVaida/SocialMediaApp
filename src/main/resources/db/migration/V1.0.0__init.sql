@@ -1,4 +1,4 @@
-create table item
+create table post
 (
     id          bigint auto_increment
         primary key,

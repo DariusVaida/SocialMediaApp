@@ -1,4 +1,4 @@
-package org.example.spring1.item.model.dto;
+package org.example.spring1.post.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDTO {
+public class PostDTO {
     private Long id;
     private String name;
     private String description;

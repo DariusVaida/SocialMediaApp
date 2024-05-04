@@ -1,4 +1,4 @@
-package org.example.spring1.item.model.dto;
+package org.example.spring1.post.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemRequestDTO {
+public class PostRequestDTO {
     private String name;
     private String description;
 }

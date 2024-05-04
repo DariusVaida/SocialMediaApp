@@ -1,9 +1,11 @@
 package org.example.spring1.user;
 
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
     private final UserMapper userMapper;
 
     public List<UserDTO> findAll() {
@@ -31,7 +34,7 @@ public class UserService {
         return userMapper.toUserDTO(userRepository.save(userMapper.toEntity(userRequestDTO)));
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
 
         userRepository.deleteById(id);
 

@@ -1,14 +1,11 @@
 package org.example.spring1.security;
 
-import org.aspectj.lang.annotation.Before;
 import org.example.project.core.SpringUnitBaseTest;
 import org.example.spring1.user.UserRepository;
 import org.example.spring1.user.model.User;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;

@@ -1,8 +1,8 @@
 package org.example.spring1.config;
 
 import lombok.RequiredArgsConstructor;
-import org.example.spring1.item.ItemRepository;
-import org.example.spring1.item.model.Item;
+import org.example.spring1.post.PostRepository;
+import org.example.spring1.post.model.Post;
 import org.example.spring1.user.RoleRepository;
 import org.example.spring1.user.UserRepository;
 import org.example.spring1.user.model.ERole;
@@ -21,7 +21,7 @@ public class Bootstrap {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-    private final ItemRepository itemRepository;
+    private final PostRepository postRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     public void bootstrapData() {
@@ -32,9 +32,9 @@ public class Bootstrap {
                 );
             }
         }
+        bootstrapUsers();
     }
 
-    @EventListener(ApplicationReadyEvent.class)
     public void bootstrapUsers() {
 
         Set<Role> roles = new HashSet<>();
@@ -70,21 +70,21 @@ public class Bootstrap {
     @EventListener(ApplicationReadyEvent.class)
     public void bootstrapItems() {
 
-        Item item1 = Item.builder()
+        Post post1 = Post.builder()
                 .id(1L)
                 .name("Item 1")
                 .description("Description 1")
                 .build();
 
-        itemRepository.save(item1);
+        postRepository.save(post1);
 
-        Item item2 = Item.builder()
+        Post post2 = Post.builder()
                 .id(2L)
                 .name("Item 2")
                 .description("Description 2")
                 .build();
 
-        itemRepository.save(item2);
+        postRepository.save(post2);
 
 
     }

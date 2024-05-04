@@ -8,10 +8,10 @@ import java.util.Set;
 @Data
 @Builder
 public class SignupRequest {
-  private String username;
-  private String email;
-  private String password;
-  private Set<String> roles;
+    private String username;
+    private String email;
+    private String password;
+    private Set<String> roles;
 }
 
 /*

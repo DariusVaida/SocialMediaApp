@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SingleBodyRequestDTO<T> {
-  T body;
+    T body;
 }

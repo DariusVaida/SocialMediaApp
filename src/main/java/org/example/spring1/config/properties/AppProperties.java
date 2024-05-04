@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 public class AppProperties {
 
-  private String jwtSecret;
-  private long jwtExpirationMs;
+    private String jwtSecret;
+    private long jwtExpirationMs;
 
 }

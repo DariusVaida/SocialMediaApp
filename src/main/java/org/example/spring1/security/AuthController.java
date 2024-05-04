@@ -27,49 +27,49 @@ import static org.example.spring1.UrlMapping.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-  private final AuthService authService;
-  private final JwtUtilsService jwtUtilsService;
+    private final AuthService authService;
+    private final JwtUtilsService jwtUtilsService;
 
-  @PostMapping(SIGN_IN)
-  public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-    Authentication authentication = authService.authenticate(
-        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    @PostMapping(SIGN_IN)
+    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authService.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-    SecurityContextHolder.getContext().setAuthentication(authentication);
-    String jwt = jwtUtilsService.generateJwtToken(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtilsService.generateJwtToken(authentication);
 
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-    List<String> roles = userDetails.getAuthorities().stream()
-        .map(GrantedAuthority::getAuthority)
-        .collect(Collectors.toList());
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
 
-    return ResponseEntity.ok(
-        JwtResponse.builder()
-            .token(jwt)
-            .id(userDetails.getId())
-            .username(userDetails.getUsername())
-            .email(userDetails.getEmail())
-            .roles(roles)
-            .build());
-  }
-
-  @PostMapping(SIGN_UP)
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-    if (authService.existsByUsername(signUpRequest.getUsername())) {
-      return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+        return ResponseEntity.ok(
+                JwtResponse.builder()
+                        .token(jwt)
+                        .id(userDetails.getId())
+                        .username(userDetails.getUsername())
+                        .email(userDetails.getEmail())
+                        .roles(roles)
+                        .build());
     }
 
-    if (authService.existsByEmail(signUpRequest.getEmail())) {
-      return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: Email is already in use!"));
+    @PostMapping(SIGN_UP)
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        if (authService.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (authService.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        authService.register(signUpRequest);
+
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
-
-    authService.register(signUpRequest);
-
-
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-  }
 }

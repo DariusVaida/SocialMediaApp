@@ -1,12 +1,12 @@
 package org.example.spring1.item;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.global.SingleBodyRequestDTO;
 import org.example.spring1.item.model.dto.ItemDTO;
 import org.example.spring1.item.model.dto.ItemRequestDTO;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.example.spring1.UrlMapping.*;
 

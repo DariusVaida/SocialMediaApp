@@ -47,7 +47,7 @@ public class UserService {
                 .orElse(null);
     }
 
-    public UserDTO changeUsername(Long id, String newUsername) {
+    public UserDTO changeName(Long id, String newUsername) {
         return userRepository.findById(id)
                 .map(user -> {
                     user.setUsername(newUsername);

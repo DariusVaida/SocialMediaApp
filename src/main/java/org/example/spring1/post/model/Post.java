@@ -22,5 +22,4 @@ public class Post {
     private String description;
 
 
-
 }

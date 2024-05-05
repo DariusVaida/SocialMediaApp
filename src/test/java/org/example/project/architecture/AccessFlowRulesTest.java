@@ -14,38 +14,38 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 @AnalyzeClasses(
-    packages = "org.example.springskeleton",
-    importOptions = ImportOption.DoNotIncludeTests.class)
+        packages = "org.example.springskeleton",
+        importOptions = ImportOption.DoNotIncludeTests.class)
 public class AccessFlowRulesTest {
-  @ArchTest
-  static final ArchRule servicesShouldNotAccessControllers =
-      noClasses()
-          .that()
-          .areAnnotatedWith(Service.class)
-          .should()
-          .dependOnClassesThat()
-          .areAnnotatedWith(RestController.class);
+    @ArchTest
+    static final ArchRule servicesShouldNotAccessControllers =
+            noClasses()
+                    .that()
+                    .areAnnotatedWith(Service.class)
+                    .should()
+                    .dependOnClassesThat()
+                    .areAnnotatedWith(RestController.class);
 
-  @ArchTest
-  static final ArchRule controllersShouldNotAccessRepositories =
-      noClasses()
-          .that()
-          .areAnnotatedWith(RestController.class)
-          .should()
-          .dependOnClassesThat()
-          .areAnnotatedWith(Repository.class)
-          .orShould()
-          .dependOnClassesThat()
-          .areMetaAnnotatedWith(Repository.class);
+    @ArchTest
+    static final ArchRule controllersShouldNotAccessRepositories =
+            noClasses()
+                    .that()
+                    .areAnnotatedWith(RestController.class)
+                    .should()
+                    .dependOnClassesThat()
+                    .areAnnotatedWith(Repository.class)
+                    .orShould()
+                    .dependOnClassesThat()
+                    .areMetaAnnotatedWith(Repository.class);
 
-  @ArchTest
-  static final ArchRule entitiesShouldNotReferenceAnyBeans =
-      noClasses()
-          .that()
-          .areNotAnnotatedWith(Entity.class)
-          .or()
-          .areAnnotatedWith(Document.class)
-          .should()
-          .dependOnClassesThat()
-          .areMetaAnnotatedWith(Bean.class);
+    @ArchTest
+    static final ArchRule entitiesShouldNotReferenceAnyBeans =
+            noClasses()
+                    .that()
+                    .areNotAnnotatedWith(Entity.class)
+                    .or()
+                    .areAnnotatedWith(Document.class)
+                    .should()
+                    .dependOnClassesThat()
+                    .areMetaAnnotatedWith(Bean.class);
 }

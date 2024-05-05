@@ -2,14 +2,9 @@ package org.example.spring1.user;
 
 import org.example.project.core.SpringUnitBaseTest;
 import org.example.spring1.user.model.User;
-import org.example.spring1.user.model.dto.UserDTO;
-import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -43,18 +38,18 @@ class UserServiceTest extends SpringUnitBaseTest {
     @Test
     void findByUsername() {
 
-            User user = User.builder()
-                    .id(1L)
-                    .username("username")
-                    .password("password")
-                    .email("email")
-                    .build();
+        User user = User.builder()
+                .id(1L)
+                .username("username")
+                .password("password")
+                .email("email")
+                .build();
 
-            when(userRepository.findByUsername("username")).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findByUsername("username")).thenReturn(java.util.Optional.of(user));
 
-            User result = userService.findByUsername("username");
+        User result = userService.findByUsername("username");
 
-            assertEquals(user, result);
+        assertEquals(user, result);
     }
 
 
@@ -78,14 +73,14 @@ class UserServiceTest extends SpringUnitBaseTest {
     @Test
     void existsByUsername() {
 
-            User user = User.builder()
-                    .username("username")
-                    .password("password")
-                    .email("email")
-                    .build();
+        User user = User.builder()
+                .username("username")
+                .password("password")
+                .email("email")
+                .build();
 
-            when(userRepository.existsByUsername("username")).thenReturn(true);
+        when(userRepository.existsByUsername("username")).thenReturn(true);
 
-            assertTrue(userService.existsByUsername("username"));
+        assertTrue(userService.existsByUsername("username"));
     }
 }

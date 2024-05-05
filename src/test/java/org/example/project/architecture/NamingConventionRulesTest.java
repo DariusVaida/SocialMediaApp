@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
 @AnalyzeClasses(
-    packages = "org.example.springskeleton",
-    importOptions = ImportOption.DoNotIncludeTests.class)
+        packages = "org.example.springskeleton",
+        importOptions = ImportOption.DoNotIncludeTests.class)
 public class NamingConventionRulesTest {
 
-  @ArchTest
-  static final ArchRule restControllersShouldHaveControllerInClassName =
-      classes()
-          .that()
-          .areAnnotatedWith(RestController.class)
-          .should()
-          .haveSimpleNameEndingWith("Controller");
+    @ArchTest
+    static final ArchRule restControllersShouldHaveControllerInClassName =
+            classes()
+                    .that()
+                    .areAnnotatedWith(RestController.class)
+                    .should()
+                    .haveSimpleNameEndingWith("Controller");
 
-  @ArchTest
-  static final ArchRule servicesShouldHaveServiceInClassName =
-      classes().that().areAnnotatedWith(Service.class).should().haveSimpleNameEndingWith("Service");
+    @ArchTest
+    static final ArchRule servicesShouldHaveServiceInClassName =
+            classes().that().areAnnotatedWith(Service.class).should().haveSimpleNameEndingWith("Service");
 
-  @ArchTest
-  static final ArchRule repositoriesShouldHaveRepoInClassName =
-      classes()
-          .that()
-          .areAnnotatedWith(Repository.class)
-          .or()
-          .areMetaAnnotatedWith(Repository.class)
-          .should()
-          .haveSimpleNameContaining("Repository");
+    @ArchTest
+    static final ArchRule repositoriesShouldHaveRepoInClassName =
+            classes()
+                    .that()
+                    .areAnnotatedWith(Repository.class)
+                    .or()
+                    .areMetaAnnotatedWith(Repository.class)
+                    .should()
+                    .haveSimpleNameContaining("Repository");
 }

@@ -24,11 +24,6 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping
-    public UserDTO create(@RequestBody UserRequestDTO dto) {
-        return userService.create(dto);
-    }
-
     @DeleteMapping(ID_PART)
     public void delete(@PathVariable Long id) {
         userService.delete(id);

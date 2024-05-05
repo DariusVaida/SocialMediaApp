@@ -10,7 +10,7 @@ create table role
 (
     id   int auto_increment
         primary key,
-    name enum ('CUSTOMER', 'MANAGER', 'ADMIN') null
+    name enum('CUSTOMER', 'MANAGER', 'ADMIN') null
 );
 
 create table AppUsers

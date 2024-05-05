@@ -1,14 +1,6 @@
 package org.example.project.example;
 
 import org.example.project.core.SpringUnitBaseTest;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
-
-import static java.util.Optional.of;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 class ExampleServiceTest extends SpringUnitBaseTest {
 

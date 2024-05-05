@@ -1,13 +1,10 @@
 package org.example.spring1.security;
 
 import org.example.project.core.SpringControllerBaseTest;
-import org.example.project.core.SpringUnitBaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthControllerTest extends SpringControllerBaseTest {
 

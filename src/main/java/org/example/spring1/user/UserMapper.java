@@ -5,6 +5,7 @@ import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.mapstruct.Mapper;
+
 @Resource
 @Mapper(componentModel = "spring")
 public interface UserMapper {

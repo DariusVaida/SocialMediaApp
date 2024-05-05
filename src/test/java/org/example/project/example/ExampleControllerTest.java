@@ -1,15 +1,6 @@
 package org.example.project.example;
 
 import org.example.project.core.SpringControllerBaseTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.ResultActions;
-
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class ExampleControllerTest extends SpringControllerBaseTest {
  /* @InjectMocks

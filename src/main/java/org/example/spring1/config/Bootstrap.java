@@ -9,7 +9,6 @@ import org.example.spring1.user.RoleRepository;
 import org.example.spring1.user.UserRepository;
 import org.example.spring1.user.model.ERole;
 import org.example.spring1.user.model.Role;
-import org.example.spring1.user.model.User;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;

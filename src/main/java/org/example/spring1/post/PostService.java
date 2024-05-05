@@ -1,6 +1,7 @@
 package org.example.spring1.post;
 
 import lombok.RequiredArgsConstructor;
+import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class PostService {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    public Post findById(Long id) {
+        return postRepository.findById(id)
+                .orElse(null);
+    }
+
     public PostDTO create(PostRequestDTO dto) {
         return postMapper.toItemDto(postRepository.save(postMapper.toEntity(dto)));
     }
@@ -34,10 +40,6 @@ public class PostService {
 
         postRepository.deleteById(id);
 
-    }
-
-    public List<PostDTO> findAllFiltered(String name) {
-        return postRepository.findAllByName(name);
     }
 
     public PostDTO update(Long id, PostRequestDTO dto) {

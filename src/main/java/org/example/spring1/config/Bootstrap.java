@@ -3,6 +3,8 @@ package org.example.spring1.config;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.post.PostRepository;
 import org.example.spring1.post.model.Post;
+import org.example.spring1.security.AuthService;
+import org.example.spring1.security.dto.SignupRequest;
 import org.example.spring1.user.RoleRepository;
 import org.example.spring1.user.UserRepository;
 import org.example.spring1.user.model.ERole;
@@ -22,6 +24,7 @@ public class Bootstrap {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final AuthService authService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void bootstrapData() {
@@ -40,30 +43,25 @@ public class Bootstrap {
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ERole.ADMIN).orElseThrow());
         if (userRepository.findByUsername("admin").isEmpty()) {
-            userRepository.save(
-                    User.builder()
-                            .id(1L)
-                            .username("admin")
-                            .password("admin")
-                            .email("admin@admin.com")
-                            .roles(roles)
-                            .build()
-            );
+            SignupRequest admin = SignupRequest.builder()
+                    .username("admin")
+                    .password("admin")
+                    .email("admin@admin.com")
+                    .roles(Set.of(ERole.ADMIN.name()))
+                    .build();
+
+            authService.register(admin);
         }
         if (userRepository.findByUsername("user").isEmpty()) {
 
-            Set<Role> roles2 = new HashSet<>();
-            roles2.add(roleRepository.findByName(ERole.CUSTOMER).orElseThrow());
+            SignupRequest user = SignupRequest.builder()
+                    .username("user")
+                    .password("user")
+                    .email("user@user.com")
+                    .roles(Set.of(ERole.CUSTOMER.name()))
+                    .build();
 
-            userRepository.save(
-                    User.builder()
-                            .id(2L)
-                            .username("user")
-                            .password("user")
-                            .email("user@user.com")
-                            .roles(roles2)
-                            .build()
-            );
+            authService.register(user);
         }
     }
 

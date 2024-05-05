@@ -35,9 +35,7 @@ public class UserService {
     }
 
     public void delete(Long id) {
-
         userRepository.deleteById(id);
-
     }
 
     public UserDTO update(Long id, UserRequestDTO userRequestDTO) {

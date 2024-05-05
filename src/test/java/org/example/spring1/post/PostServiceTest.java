@@ -21,16 +21,25 @@ class PostServiceTest extends SpringUnitBaseTest {
     @Mock
     private PostRepository postRepository;
 
-    @Test
-    void get() {
-
-    }
-
-
 
     @Test
-    void findAllFiltered() {
+    void findById() {
+
+        Post post = Post.builder()
+                .id(1L)
+                .name("name")
+                .description("description")
+                .build();
+
+        when(postRepository.findById(1L)).thenReturn(java.util.Optional.of(post));
+
+        Post result = postService.findById(1L);
+
+        assertEquals(1L, result.getId());
+        assertEquals("name", result.getName());
+        assertEquals("description", result.getDescription());
     }
+
 
 
 }

@@ -1,6 +1,7 @@
 package org.example.spring1.user;
 
 import lombok.RequiredArgsConstructor;
+import org.example.spring1.exceptions.EntityNotFoundException;
 import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
@@ -20,12 +21,16 @@ public class UserService {
         return userRepository.findAll().stream().map(userMapper::toUserDTO).toList();
     }
 
+    public UserDTO create(UserRequestDTO userRequestDTO) {
+        return userMapper.toUserDTO(userRepository.save(userMapper.toEntity(userRequestDTO)));
+    }
+
     public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+        return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
 
@@ -40,7 +45,7 @@ public class UserService {
                     user.setPassword(userRequestDTO.getPassword());
                     return userMapper.toUserDTO(userRepository.save(user));
                 })
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     public UserDTO changeName(Long id, String newUsername) {
@@ -49,7 +54,7 @@ public class UserService {
                     user.setUsername(newUsername);
                     return userMapper.toUserDTO(userRepository.save(user));
                 })
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     public boolean existsById(Long id) {

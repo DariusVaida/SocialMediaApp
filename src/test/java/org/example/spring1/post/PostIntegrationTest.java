@@ -26,10 +26,6 @@ class PostIntegrationTest extends SpringIntegrationBaseTest {
     }
 
     @Test
-    void findAllByName() {
-    }
-
-    @Test
     void findAll() {
 
         assertEquals(0, postRepository.findAll().size());

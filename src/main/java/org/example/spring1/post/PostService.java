@@ -1,6 +1,7 @@
 package org.example.spring1.post;
 
 import lombok.RequiredArgsConstructor;
+import org.example.spring1.exceptions.EntityNotFoundException;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
@@ -24,12 +25,12 @@ public class PostService {
         return postRepository.findById(id)
                 .map(postMapper::toItemDto)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 
     public Post findById(Long id) {
         return postRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 
     public PostDTO create(PostRequestDTO dto) {
@@ -49,7 +50,7 @@ public class PostService {
                     item.setDescription(dto.getDescription());
                     return postMapper.toItemDto(postRepository.save(item));
                 })
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 
     public PostDTO changeName(Long id, String newName) {
@@ -58,7 +59,7 @@ public class PostService {
                     item.setName(newName);
                     return postMapper.toItemDto(postRepository.save(item));
                 })
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 
     public void deleteMultiple(List<Long> ids) {
@@ -71,6 +72,14 @@ public class PostService {
                     item.setDescription(newDescription);
                     return postMapper.toItemDto(postRepository.save(item));
                 })
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
+    }
+
+    public boolean existsById(Long id) {
+        return postRepository.existsById(id);
+    }
+
+    public boolean existsByName(String name) {
+        return postRepository.existsByName(name);
     }
 }

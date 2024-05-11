@@ -29,6 +29,11 @@ public class UserController {
         userService.delete(id);
     }
 
+    @PostMapping
+    public UserDTO create(@RequestBody UserRequestDTO dto) {
+        return userService.create(dto);
+    }
+
     @DeleteMapping
     public void deleteMultiple(@RequestParam List<Long> ids) {
         userService.deleteMultiple(ids);

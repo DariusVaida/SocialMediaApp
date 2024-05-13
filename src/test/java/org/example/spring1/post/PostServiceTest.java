@@ -22,6 +22,9 @@ class PostServiceTest extends SpringUnitBaseTest {
     @Mock
     private PostRepository postRepository;
 
+    @Mock
+    private PostMapper postMapper;
+
 
     @Test
     void findById() {
@@ -109,6 +112,38 @@ class PostServiceTest extends SpringUnitBaseTest {
 
         assertTrue(postService.existsByName("name"));
 
+    }
+
+    @Test
+    void create(){
+
+            PostRequestDTO postRequestDTO = PostRequestDTO.builder()
+                    .name("name")
+                    .description("description")
+                    .build();
+
+            Post post = Post.builder()
+                    .id(1L)
+                    .name("name")
+                    .description("description")
+                    .build();
+
+            when(postRepository.save(post)).thenReturn(post);
+
+            PostDTO postDTO = PostDTO.builder()
+                    .id(1L)
+                    .name("name")
+                    .description("description")
+                    .build();
+
+            when(postMapper.toEntity(postRequestDTO)).thenReturn(post);
+            when(postMapper.toItemDto(post)).thenReturn(postDTO);
+
+            PostDTO result = postService.create(postRequestDTO);
+
+            assertEquals(1L, result.getId());
+            assertEquals("name", result.getName());
+            assertEquals("description", result.getDescription());
     }
 
 }

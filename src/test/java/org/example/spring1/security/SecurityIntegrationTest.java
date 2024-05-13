@@ -5,6 +5,7 @@ import org.example.spring1.security.dto.LoginRequest;
 import org.example.spring1.security.dto.SignupRequest;
 import org.example.spring1.user.UserRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -23,7 +24,7 @@ public class SecurityIntegrationTest extends SpringIntegrationBaseTest {
     @Autowired
     private UserRepository userRepository;
 
-    @AfterEach
+    @BeforeEach
     void tearDown() {
         userRepository.deleteAll();
     }
@@ -54,13 +55,11 @@ public class SecurityIntegrationTest extends SpringIntegrationBaseTest {
 
         //I don't understand why the test is failing
         SignupRequest user = SignupRequest.builder()
-                .username("username1")
-                .email("email2")
-                .password("password1")
+                .username("username123")
+                .email("email223")
+                .password("password12")
                 .roles(Set.of(CUSTOMER.name()))
                 .build();
-
-        authController.registerUser(user);
 
         assertSame(HttpStatusCode.valueOf(200), authController.registerUser(user).getStatusCode());
 

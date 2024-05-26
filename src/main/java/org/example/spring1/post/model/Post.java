@@ -2,6 +2,9 @@ package org.example.spring1.post.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.spring1.photo.Photo;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -20,6 +23,9 @@ public class Post {
 
     @Column(length = 512)
     private String description;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Photo photo;
 
 
 }

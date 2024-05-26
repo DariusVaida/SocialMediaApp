@@ -12,11 +12,11 @@ import org.example.spring1.post.model.Post;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Post postId;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Post post;
 
     @Column(length = 8192)
     private String name;

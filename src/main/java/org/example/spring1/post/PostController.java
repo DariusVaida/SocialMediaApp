@@ -11,7 +11,7 @@ import java.util.List;
 import static org.example.spring1.UrlMapping.*;
 
 @RestController
-@RequestMapping(POSTS)
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostController {
 
@@ -22,7 +22,7 @@ public class PostController {
         return postService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public PostDTO create(@RequestBody PostRequestDTO dto) {
         return postService.create(dto);
     }

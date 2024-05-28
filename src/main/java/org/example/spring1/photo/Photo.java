@@ -21,9 +21,6 @@ public class Photo {
     @Column(length = 8192)
     private String name;
 
-    @Column(length = 128)
-    private String fileType;
-
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] data;

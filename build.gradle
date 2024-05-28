@@ -46,6 +46,9 @@ dependencies {
     compileOnly 'javax.xml.bind:jaxb-api:2.3.0'
     testImplementation 'javax.xml.bind:jaxb-api:2.3.0'
 
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '3.3.0'
+
+
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 

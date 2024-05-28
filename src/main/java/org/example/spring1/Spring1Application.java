@@ -10,6 +10,7 @@ public class Spring1Application {
 
     public static void main(String[] args) {
 
+        System.out.println("Hello Spring 1");
         SpringApplication.run(Spring1Application.class, args);
 
 

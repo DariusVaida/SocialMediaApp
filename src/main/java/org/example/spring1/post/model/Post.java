@@ -3,6 +3,7 @@ package org.example.spring1.post.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.spring1.photo.Photo;
+import org.example.spring1.user.model.User;
 
 import java.util.List;
 
@@ -24,8 +25,9 @@ public class Post {
     @Column(length = 512)
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Photo photo;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }

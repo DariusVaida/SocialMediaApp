@@ -5,6 +5,8 @@ import org.example.spring1.exceptions.EntityNotFoundException;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
+import org.example.spring1.user.UserService;
+import org.example.spring1.user.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final PostMapper postMapper;
+    private final UserService userService;
 
     public List<PostDTO> findAll() {
         return postRepository.findAll().stream().map(postMapper::toItemDto).toList();
@@ -34,7 +37,11 @@ public class PostService {
     }
 
     public PostDTO create(PostRequestDTO dto) {
-        return postMapper.toItemDto(postRepository.save(postMapper.toEntity(dto)));
+
+        User user = userService.findById(dto.getUserId());
+        Post post = postMapper.toEntity(dto);
+        post.setUser(user);
+        return postMapper.toItemDto(postRepository.save(post));
     }
 
     public void delete(Long id) {

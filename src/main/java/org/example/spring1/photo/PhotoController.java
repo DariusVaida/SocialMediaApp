@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 
 @RequestMapping("/photo")
 @RestController
@@ -21,22 +23,22 @@ public class PhotoController {
     private final PostService postService;
 
     @PostMapping("/uploadFile")
-    public ResponseEntity<?> uploadFile(PhotoRequestDTO dto) {
+    public ResponseEntity<?> uploadFile(@RequestParam("image") MultipartFile file, @RequestParam("postId") Long postId) {
 
-        MultipartFile file = dto.getImage();
         Photo dbFile = photoService.storeFile(file);
-        Long postId = dto.getPostId();
         photoService.setPost(dbFile.getId(), postId);
 
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/downloadFile/{id}")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable String id) {
-        Photo photo = photoService.getFile(id);
+    @GetMapping
+    public ResponseEntity<byte[]> getPhotos() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        List<Photo> photos = photoService.getAllPhotos();
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + photo.getName() + "\"")
-                .body(photo.getData());
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(photos.get(0).getData());
     }
 }

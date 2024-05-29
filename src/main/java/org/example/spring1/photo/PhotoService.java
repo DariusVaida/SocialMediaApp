@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +43,10 @@ public class PhotoService {
     public Photo getFile(String fileId) {
         return photoRepository.findById(fileId)
                 .orElseThrow(() -> new FileStorageException("File not found with id " + fileId));
+    }
+
+    public List<Photo> getAllPhotos() {
+        return photoRepository.findAll();
     }
 
     public void setPost(Long id, Long postId) {

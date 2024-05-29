@@ -27,7 +27,7 @@ public class PostController {
         return postService.create(dto);
     }
 
-    @DeleteMapping(ID_PART)
+    @DeleteMapping("/delete"+ID_PART)
     public void delete(@PathVariable Long id) {
         postService.delete(id);
     }

@@ -27,7 +27,7 @@ public class PhotoService {
 
         try {
 
-            if(fileName.contains("..")) {
+            if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
@@ -50,9 +50,14 @@ public class PhotoService {
     }
 
     public void setPost(Long id, Long postId) {
-        Photo photo = photoRepository.findById(id.toString()).orElseThrow(() -> new FileStorageException("File not found with id " + id));
-        photo.setPost(postRepository.findById(postId).orElseThrow(() -> new FileStorageException("Post not found with id " + postId)));
-photoRepository.save(photo);
 
+        Photo photo = photoRepository.findById(id.toString()).orElseThrow(() -> new FileStorageException("File not found with id " + id));
+        photoRepository.save(photo);
+
+    }
+
+    public void delete(Long id) {
+
+        photoRepository.deleteById(id.toString());
     }
 }

@@ -3,6 +3,7 @@ package org.example.spring1.post;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.exceptions.EntityNotFoundException;
 import org.example.spring1.photo.Photo;
+import org.example.spring1.photo.PhotoService;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
@@ -18,6 +19,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PhotoService photoService;
     private final PostMapper postMapper;
     private final UserService userService;
 
@@ -47,8 +49,11 @@ public class PostService {
 
     public void delete(Long id) {
 
-        postRepository.deleteById(id);
+        Post post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post not found"));
 
+
+        postRepository.deleteById(id);
+        photoService.delete(post.getPhoto().getId());
     }
 
     public PostDTO update(Long id, PostRequestDTO dto) {

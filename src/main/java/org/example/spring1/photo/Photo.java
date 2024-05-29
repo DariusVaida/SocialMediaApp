@@ -15,9 +15,6 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Post post;
-
     @Column(length = 8192)
     private String name;
 

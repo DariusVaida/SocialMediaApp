@@ -11,6 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhotoRequestDTO {
-    private Long postId;
+    private Long id;
     private MultipartFile image;
 }

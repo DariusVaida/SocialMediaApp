@@ -2,6 +2,7 @@ package org.example.spring1.post;
 
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.exceptions.EntityNotFoundException;
+import org.example.spring1.photo.Photo;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
@@ -60,6 +61,7 @@ public class PostService {
                 .orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 
+
     public PostDTO changeName(Long id, String newName) {
         return postRepository.findById(id)
                 .map(item -> {
@@ -88,5 +90,12 @@ public class PostService {
 
     public boolean existsByName(String name) {
         return postRepository.existsByName(name);
+    }
+
+    public PostDTO updatePhotoId(Long postId, Photo photo) {
+
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        post.setPhoto(photo);
+        return postMapper.toItemDto(postRepository.save(post));
     }
 }

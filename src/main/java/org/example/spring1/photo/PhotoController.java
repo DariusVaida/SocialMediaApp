@@ -28,6 +28,8 @@ public class PhotoController {
         Photo dbFile = photoService.storeFile(file);
         photoService.setPost(dbFile.getId(), postId);
 
+        postService.updatePhotoId(postId, dbFile);
+
         return ResponseEntity.ok().build();
     }
 

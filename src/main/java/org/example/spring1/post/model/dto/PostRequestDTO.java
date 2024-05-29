@@ -14,5 +14,10 @@ public class PostRequestDTO {
     private Long id;
     private String name;
     private String description;
+    private Long photoId;
     private Long userId;
+
+    public PostRequestDTO(Long id) {
+        this.photoId = id;
+    }
 }

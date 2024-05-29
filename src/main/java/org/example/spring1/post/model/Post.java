@@ -25,6 +25,10 @@ public class Post {
     @Column(length = 512)
     private String description;
 
+    @OneToOne
+    @JoinColumn(name = "photo_id")
+    private Photo photo;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -10,6 +10,7 @@ import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.example.spring1.UrlMapping.*;
 
@@ -26,6 +27,11 @@ public class UserController {
     @GetMapping
     public List<UserDTO> findAll() {
         return userService.findAll();
+    }
+
+    @GetMapping("/liked" + ID_PART)
+    public Set<Post> findLikedPosts(@PathVariable Long id){
+        return userService.findLikedPosts(id);
     }
 
     @DeleteMapping(ID_PART)

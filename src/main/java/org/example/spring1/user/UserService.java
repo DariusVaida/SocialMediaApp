@@ -10,6 +10,7 @@ import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -75,9 +76,15 @@ public class UserService {
     public UserDTO like(Long id, Post post) {
 
         User user = findById(id);
+        user.setPassword("");
 
         user.getLikedPosts().add(post);
 
         return userMapper.toUserDTO(userRepository.save(user));
+    }
+
+    public Set<Post> findLikedPosts(Long id) {
+
+        return findById(id).getLikedPosts();
     }
 }

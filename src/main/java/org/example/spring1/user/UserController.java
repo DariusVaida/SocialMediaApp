@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.spring1.global.SingleBodyRequestDTO;
 import org.example.spring1.post.PostService;
 import org.example.spring1.post.model.Post;
+import org.example.spring1.user.model.User;
+import org.example.spring1.user.model.dto.LikeRequestDTO;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.springframework.web.bind.annotation.*;
@@ -44,12 +46,16 @@ public class UserController {
         return userService.create(dto);
     }
 
-    @PostMapping("/like"+ ID_PART)
-    public UserDTO like(@PathVariable Long id, @RequestParam("postId") Long postId){
+    @PostMapping("/like")
+    public UserDTO like(@RequestBody LikeRequestDTO likeRequestDTO){
+        Long postId = likeRequestDTO.getPostId();
+        System.out.println(postId);
         Post post = postService.findById(postId);
-        System.out.println("like");
-        return userService.like(id, post);
+        Long userId = likeRequestDTO.getUserId();
+        System.out.println(userId);
+        return userService.like(userId, post);
     }
+
     @DeleteMapping
     public void deleteMultiple(@RequestParam List<Long> ids) {
         userService.deleteMultiple(ids);

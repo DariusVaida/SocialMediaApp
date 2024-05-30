@@ -76,7 +76,6 @@ public class UserService {
     public UserDTO like(Long id, Post post) {
 
         User user = findById(id);
-        user.setPassword("");
 
         user.getLikedPosts().add(post);
 

@@ -103,4 +103,9 @@ public class PostService {
         post.setPhoto(photo);
         return postMapper.toItemDto(postRepository.save(post));
     }
+
+    public List<PostDTO> getLikedPosts(Long id) {
+
+        return postRepository.findAllByUserId(id);
+    }
 }

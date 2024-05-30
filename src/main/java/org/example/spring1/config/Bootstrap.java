@@ -73,7 +73,7 @@ public class Bootstrap {
                 .description("Description 1")
                 .build();
 
-        postRepository.save(post1);
+        //postRepository.save(post1);
 
         Post post2 = Post.builder()
                 .id(2L)
@@ -81,7 +81,7 @@ public class Bootstrap {
                 .description("Description 2")
                 .build();
 
-        postRepository.save(post2);
+        //postRepository.save(post2);
 
 
     }

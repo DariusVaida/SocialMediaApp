@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.example.spring1.post.model.Post;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +35,14 @@ public class User {
 
     @Column(nullable = false, length = 120)
     private String password;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "likes",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    private Set<Post> likedPosts = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

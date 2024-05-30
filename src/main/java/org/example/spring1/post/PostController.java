@@ -2,6 +2,7 @@ package org.example.spring1.post;
 
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.global.SingleBodyRequestDTO;
+import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ public class PostController {
     @GetMapping
     public List<PostDTO> findAll() {
         return postService.findAll();
+    }
+
+    @GetMapping("/likes/user" + ID_PART)
+    public List<PostDTO> get(@PathVariable Long id) {
+        return postService.getLikedPosts(id);
     }
 
     @PostMapping("/create")

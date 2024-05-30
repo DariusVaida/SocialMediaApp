@@ -3,7 +3,6 @@ package org.example.spring1.photo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.spring1.post.model.Post;
 
 @Entity
 @Table(name = "photos")

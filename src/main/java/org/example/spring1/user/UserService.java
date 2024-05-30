@@ -2,6 +2,8 @@ package org.example.spring1.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.exceptions.EntityNotFoundException;
+import org.example.spring1.post.PostService;
+import org.example.spring1.post.model.Post;
 import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
@@ -16,6 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
+
 
     public List<UserDTO> findAll() {
         return userRepository.findAll().stream().map(userMapper::toUserDTO).toList();
@@ -69,4 +72,12 @@ public class UserService {
         ids.forEach(userRepository::deleteById);
     }
 
+    public UserDTO like(Long id, Post post) {
+
+        User user = findById(id);
+
+        user.getLikedPosts().add(post);
+
+        return userMapper.toUserDTO(userRepository.save(user));
+    }
 }

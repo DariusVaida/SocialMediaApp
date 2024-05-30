@@ -41,6 +41,7 @@ public class UserController {
     @PostMapping("/like"+ ID_PART)
     public UserDTO like(@PathVariable Long id, @RequestParam("postId") Long postId){
         Post post = postService.findById(postId);
+        System.out.println("like");
         return userService.like(id, post);
     }
     @DeleteMapping

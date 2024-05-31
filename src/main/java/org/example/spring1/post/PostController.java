@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.example.spring1.UrlMapping.*;
 
+
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor

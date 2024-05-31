@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -82,8 +83,25 @@ public class UserService {
         return userMapper.toUserDTO(userRepository.save(user));
     }
 
-    public Set<Post> findLikedPosts(Long id) {
+    public List<Post> findLikedPosts(Long id) {
 
-        return findById(id).getLikedPosts();
+        User user = findById(id);
+        Set<Post> likedPosts = user.getLikedPosts().stream().map(
+                post -> Post.builder()
+                        .id(post.getId())
+                        .name(post.getName())
+                        .description(post.getDescription())
+                        .photo(post.getPhoto())
+                        .build()
+        ).collect(Collectors.toSet());
+        List<Post> likedPostsList = likedPosts.stream().toList();
+        return likedPostsList;
+    }
+
+    public void removePost(Long id, Post post) {
+
+        User user = findById(id);
+        user.getLikedPosts().remove(post);
+        userRepository.save(user);
     }
 }

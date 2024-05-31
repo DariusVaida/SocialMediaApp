@@ -51,6 +51,7 @@ public class PostService {
 
         Post post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post not found"));
 
+        userService.removePost(post.getUser().getId(), post);
 
         postRepository.deleteById(id);
         photoService.delete(post.getPhoto().getId());

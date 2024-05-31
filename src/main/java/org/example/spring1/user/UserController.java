@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/liked" + ID_PART)
-    public Set<Post> findLikedPosts(@PathVariable Long id){
+    public List<Post> findLikedPosts(@PathVariable Long id){
         return userService.findLikedPosts(id);
     }
 

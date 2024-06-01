@@ -49,10 +49,8 @@ public class UserController {
     @PostMapping("/like")
     public UserDTO like(@RequestBody LikeRequestDTO likeRequestDTO){
         Long postId = likeRequestDTO.getPostId();
-        System.out.println(postId);
         Post post = postService.findById(postId);
         Long userId = likeRequestDTO.getUserId();
-        System.out.println(userId);
         return userService.like(userId, post);
     }
 

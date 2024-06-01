@@ -35,8 +35,7 @@ public class PhotoController {
 
     @GetMapping
     public ResponseEntity<byte[]> getPhotos() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
+
         List<Photo> photos = photoService.getAllPhotos();
 
         return ResponseEntity.ok()

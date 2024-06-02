@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 @AnalyzeClasses(
-        packages = "org.example.springskeleton",
+        packages = "org.example.spring1",
         importOptions = ImportOption.DoNotIncludeTests.class)
 public class AccessFlowRulesTest {
     @ArchTest

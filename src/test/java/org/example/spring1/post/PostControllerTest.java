@@ -3,6 +3,7 @@ package org.example.spring1.post;
 import org.example.project.core.SpringControllerBaseTest;
 import org.example.project.core.SpringUnitBaseTest;
 import org.example.spring1.global.SingleBodyRequestDTO;
+import org.example.spring1.photo.PhotoService;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
@@ -24,11 +25,14 @@ class PostControllerTest extends SpringControllerBaseTest {
     @Mock
     private PostService postService;
 
+    @Mock
+    private PhotoService photoService;
+
 
     @BeforeEach
     public void setUp() {
         super.setUp();
-        postController = new PostController(postService);
+        postController = new PostController(postService, photoService);
         mvc = buildForController(postController);
     }
 

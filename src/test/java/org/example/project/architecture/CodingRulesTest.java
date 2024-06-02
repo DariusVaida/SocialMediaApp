@@ -13,7 +13,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*;
 import static com.tngtech.archunit.library.GeneralCodingRules.*;
 
 @AnalyzeClasses(
-        packages = "org.example.springskeleton",
+        packages = "org.example.spring1",
         importOptions = ImportOption.DoNotIncludeTests.class)
 public class CodingRulesTest {
 
@@ -54,7 +54,7 @@ public class CodingRulesTest {
                     .that()
                     .areAnnotatedWith(Configuration.class)
                     .should()
-                    .resideOutsideOfPackage("org.example.springskeleton.config..");
+                    .resideOutsideOfPackage("org.example.spring1.config..");
 
     @ArchTest
     static final ArchRule jobsShouldResideInJobsPackage =
@@ -63,6 +63,6 @@ public class CodingRulesTest {
                     .areAnnotatedWith(Scheduled.class)
                     .should()
                     .beDeclaredInClassesThat()
-                    .resideOutsideOfPackage("org.example.springskeleton.jobs..");
+                    .resideOutsideOfPackage("org.example.spring1.jobs..");
 
 }

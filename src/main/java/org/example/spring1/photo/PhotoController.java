@@ -25,21 +25,16 @@ public class PhotoController {
     @PostMapping("/uploadFile")
     public ResponseEntity<?> uploadFile(@RequestParam("image") MultipartFile file, @RequestParam("postId") Long postId) {
 
-        Photo dbFile = photoService.storeFile(file);
-        photoService.setPost(dbFile.getId(), postId);
-
-        postService.updatePhotoId(postId, dbFile);
-
-        return ResponseEntity.ok().build();
+        return photoService.handleFile(file, postId);
     }
-
-    @GetMapping
-    public ResponseEntity<byte[]> getPhotos() {
-
-        List<Photo> photos = photoService.getAllPhotos();
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_JPEG)
-                .body(photos.get(0).getData());
-    }
+//
+//    @GetMapping
+//    public ResponseEntity<byte[]> getPhotos() {
+//
+//        List<Photo> photos = photoService.getAllPhotos();
+//
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.IMAGE_JPEG)
+//                .body(photos.get(0).getData());
+//    }
 }

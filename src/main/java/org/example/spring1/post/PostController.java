@@ -2,6 +2,7 @@ package org.example.spring1.post;
 
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.global.SingleBodyRequestDTO;
+import org.example.spring1.photo.PhotoService;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
@@ -18,6 +19,7 @@ import static org.example.spring1.UrlMapping.*;
 public class PostController {
 
     private final PostService postService;
+    private final PhotoService photoService;
 
     @GetMapping
     public List<PostDTO> findAll() {
@@ -37,6 +39,7 @@ public class PostController {
     @DeleteMapping("/delete"+ID_PART)
     public void delete(@PathVariable Long id) {
         postService.delete(id);
+        photoService.deleteByPostId(id);
     }
 
     @DeleteMapping

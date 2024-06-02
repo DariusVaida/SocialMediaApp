@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*;
 
 @AnalyzeClasses(
-        packages = "org.example.springskeleton",
+        packages = "org.example.spring1",
         importOptions = ImportOption.DoNotIncludeTests.class)
 public class ControllerRulesTest {
 
@@ -102,7 +102,7 @@ public class ControllerRulesTest {
             @Override
             public void check(JavaMethod item, ConditionEvents events) {
                 Type genericReturnType = item.reflect().getGenericReturnType();
-                if (!genericReturnType.getTypeName().endsWith("Dto")) {
+                if (!genericReturnType.getTypeName().endsWith("DTO")) {
                     events.add(
                             new SimpleConditionEvent(
                                     item,

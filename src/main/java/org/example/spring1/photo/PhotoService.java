@@ -3,7 +3,10 @@ package org.example.spring1.photo;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.exceptions.FileStorageException;
 import org.example.spring1.post.PostRepository;
+import org.example.spring1.post.PostService;
+import org.example.spring1.post.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ public class PhotoService {
 
     private final PhotoRepository photoRepository;
     private final PostRepository postRepository;
+    private final PostService postService;
 
     public Photo storeFile(MultipartFile file) {
 
@@ -51,6 +55,7 @@ public class PhotoService {
 
     public void setPost(Long id, Long postId) {
 
+
         Photo photo = photoRepository.findById(id.toString()).orElseThrow(() -> new FileStorageException("File not found with id " + id));
         photoRepository.save(photo);
 
@@ -59,5 +64,26 @@ public class PhotoService {
     public void delete(Long id) {
 
         photoRepository.deleteById(id.toString());
+    }
+
+    public ResponseEntity<?> handleFile(MultipartFile file, Long postId) {
+
+        Photo dbFile = storeFile(file);
+
+        setPost(dbFile.getId(), postId);
+
+        postService.updatePhotoId(postId, dbFile);
+
+        return ResponseEntity.ok().build();
+    }
+
+    public void deleteByPostId(Long id) {
+
+        Optional<Post> post = postRepository.findById(id);
+
+        if (post.isPresent()) {
+            Long photoId = post.get().getPhoto().getId();
+            photoRepository.deleteById(photoId.toString());
+        }
     }
 }

@@ -27,7 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:3.2.4'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-
+    implementation "com.twitter:twitter-api-java-sdk:1.1.4"
     implementation 'org.twitter4j:twitter4j-core:4.1.2'
     implementation 'io.github.takke:jp.takke.twitter4j-v2:1.4.3'
 

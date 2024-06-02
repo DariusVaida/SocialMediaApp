@@ -19,7 +19,6 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final PhotoService photoService;
     private final PostMapper postMapper;
     private final UserService userService;
 
@@ -54,7 +53,6 @@ public class PostService {
         userService.removePost(post.getUser().getId(), post);
 
         postRepository.deleteById(id);
-        photoService.delete(post.getPhoto().getId());
     }
 
     public PostDTO update(Long id, PostRequestDTO dto) {

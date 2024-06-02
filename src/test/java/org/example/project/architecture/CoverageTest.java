@@ -23,7 +23,7 @@ import static com.tngtech.archunit.core.domain.JavaModifier.PRIVATE;
 import static com.tngtech.archunit.core.domain.JavaModifier.STATIC;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
-@AnalyzeClasses(packages = "org.example.springskeleton")
+@AnalyzeClasses(packages = "org.example.spring1")
 public class CoverageTest {
 
     public static final double MIN_METHOD_COVERAGE_CONTROLLER = 1.0;

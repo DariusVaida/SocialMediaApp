@@ -2,6 +2,7 @@ package org.example.spring1.user;
 
 import org.example.project.core.SpringControllerBaseTest;
 import org.example.spring1.global.SingleBodyRequestDTO;
+import org.example.spring1.post.PostService;
 import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
@@ -23,10 +24,13 @@ class UserControllerTest extends SpringControllerBaseTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private PostService postService;
+
     @BeforeEach
     public void setUp() {
         super.setUp();
-        userController = new UserController(userService);
+        userController = new UserController(userService, postService);
         mvc = buildForController(userController);
     }
 

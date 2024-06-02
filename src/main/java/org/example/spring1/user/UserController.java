@@ -5,14 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.example.spring1.global.SingleBodyRequestDTO;
 import org.example.spring1.post.PostService;
 import org.example.spring1.post.model.Post;
-import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.LikeRequestDTO;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.example.spring1.UrlMapping.*;
 
@@ -31,8 +29,8 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/liked" + ID_PART)
-    public List<Post> findLikedPosts(@PathVariable Long id){
+    @GetMapping(LIKED + ID_PART)
+    public List<Post> findLikedPosts(@PathVariable Long id) {
         return userService.findLikedPosts(id);
     }
 
@@ -46,8 +44,8 @@ public class UserController {
         return userService.create(dto);
     }
 
-    @PostMapping("/like")
-    public UserDTO like(@RequestBody LikeRequestDTO likeRequestDTO){
+    @PostMapping(LIKE)
+    public UserDTO like(@RequestBody LikeRequestDTO likeRequestDTO) {
         Long postId = likeRequestDTO.getPostId();
         Post post = postService.findById(postId);
         Long userId = likeRequestDTO.getUserId();

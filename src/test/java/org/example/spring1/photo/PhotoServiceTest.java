@@ -3,12 +3,9 @@ package org.example.spring1.photo;
 import org.example.project.core.SpringUnitBaseTest;
 import org.example.spring1.exceptions.FileStorageException;
 import org.example.spring1.post.PostRepository;
-import org.example.spring1.post.PostService;
-import org.example.spring1.post.model.Post;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;

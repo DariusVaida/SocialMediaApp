@@ -3,7 +3,6 @@ package org.example.spring1.post;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.exceptions.EntityNotFoundException;
 import org.example.spring1.photo.Photo;
-import org.example.spring1.photo.PhotoService;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;

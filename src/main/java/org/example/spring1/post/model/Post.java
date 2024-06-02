@@ -5,8 +5,6 @@ import lombok.*;
 import org.example.spring1.photo.Photo;
 import org.example.spring1.user.model.User;
 
-import java.util.List;
-
 @Builder
 @Getter
 @Setter

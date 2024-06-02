@@ -7,7 +7,6 @@ import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
 import org.example.spring1.user.UserRepository;
 import org.example.spring1.user.UserService;
-import org.example.spring1.user.model.User;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -116,35 +115,35 @@ class PostServiceTest extends SpringUnitBaseTest {
     }
 
     @Test
-    void create(){
+    void create() {
 
-            PostRequestDTO postRequestDTO = PostRequestDTO.builder()
-                    .name("name")
-                    .description("description")
-                    .build();
+        PostRequestDTO postRequestDTO = PostRequestDTO.builder()
+                .name("name")
+                .description("description")
+                .build();
 
-            Post post = Post.builder()
-                    .id(1L)
-                    .name("name")
-                    .description("description")
-                    .build();
+        Post post = Post.builder()
+                .id(1L)
+                .name("name")
+                .description("description")
+                .build();
 
-            when(postRepository.save(post)).thenReturn(post);
+        when(postRepository.save(post)).thenReturn(post);
 
-            PostDTO postDTO = PostDTO.builder()
-                    .id(1L)
-                    .name("name")
-                    .description("description")
-                    .build();
+        PostDTO postDTO = PostDTO.builder()
+                .id(1L)
+                .name("name")
+                .description("description")
+                .build();
 
-            when(postMapper.toEntity(postRequestDTO)).thenReturn(post);
-            when(postMapper.toItemDto(post)).thenReturn(postDTO);
+        when(postMapper.toEntity(postRequestDTO)).thenReturn(post);
+        when(postMapper.toItemDto(post)).thenReturn(postDTO);
 
-            PostDTO result = postService.create(postRequestDTO);
+        PostDTO result = postService.create(postRequestDTO);
 
-            assertEquals(1L, result.getId());
-            assertEquals("name", result.getName());
-            assertEquals("description", result.getDescription());
+        assertEquals(1L, result.getId());
+        assertEquals("name", result.getName());
+        assertEquals("description", result.getDescription());
     }
 
     @Test
@@ -239,7 +238,7 @@ class PostServiceTest extends SpringUnitBaseTest {
     }
 
     @Test
-    void changeDescription(){
+    void changeDescription() {
         Long postId = 1L;
         String newDescription = "New Description";
         Post post = Post.builder().id(postId).name("Sample Post").description("Old Description").build();
@@ -259,7 +258,7 @@ class PostServiceTest extends SpringUnitBaseTest {
     }
 
     @Test
-    void getLikedPosts(){
+    void getLikedPosts() {
         Long id = 1L;
         Post post = Post.builder().name("Sample Post").description("Sample Description").build();
         PostDTO postDTO = PostDTO.builder().name("Sample Post").description("Sample Description").build();

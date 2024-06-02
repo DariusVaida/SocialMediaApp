@@ -3,7 +3,6 @@ package org.example.spring1.post;
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.global.SingleBodyRequestDTO;
 import org.example.spring1.photo.PhotoService;
-import org.example.spring1.post.model.Post;
 import org.example.spring1.post.model.dto.PostDTO;
 import org.example.spring1.post.model.dto.PostRequestDTO;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,10 @@ import static org.example.spring1.UrlMapping.*;
 
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping(POSTS)
 @RequiredArgsConstructor
 public class PostController {
+
 
     private final PostService postService;
     private final PhotoService photoService;
@@ -26,17 +26,17 @@ public class PostController {
         return postService.findAll();
     }
 
-    @GetMapping("/likes/user" + ID_PART)
+    @GetMapping(LIKES_USER + ID_PART)
     public List<PostDTO> get(@PathVariable Long id) {
         return postService.getLikedPosts(id);
     }
 
-    @PostMapping("/create")
+    @PostMapping(CREATE)
     public PostDTO create(@RequestBody PostRequestDTO dto) {
         return postService.create(dto);
     }
 
-    @DeleteMapping("/delete"+ID_PART)
+    @DeleteMapping(DELETE_POST + ID_PART)
     public void delete(@PathVariable Long id) {
         postService.delete(id);
         photoService.deleteByPostId(id);

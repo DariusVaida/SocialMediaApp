@@ -4,7 +4,6 @@ import org.example.project.core.SpringIntegrationBaseTest;
 import org.example.spring1.security.dto.LoginRequest;
 import org.example.spring1.security.dto.SignupRequest;
 import org.example.spring1.user.UserRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

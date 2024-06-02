@@ -2,13 +2,9 @@ package org.example.spring1.photo;
 
 import org.example.project.core.SpringIntegrationBaseTest;
 import org.example.spring1.post.PostRepository;
-import org.example.spring1.post.model.Post;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,7 +26,6 @@ class PhotoIntegrationTest extends SpringIntegrationBaseTest {
     void tearDown() {
         photoRepository.deleteAll();
     }
-
 
 
     @Test

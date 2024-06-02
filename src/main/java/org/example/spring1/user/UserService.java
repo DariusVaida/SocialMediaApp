@@ -2,7 +2,6 @@ package org.example.spring1.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.spring1.exceptions.EntityNotFoundException;
-import org.example.spring1.post.PostService;
 import org.example.spring1.post.model.Post;
 import org.example.spring1.user.model.User;
 import org.example.spring1.user.model.dto.UserDTO;

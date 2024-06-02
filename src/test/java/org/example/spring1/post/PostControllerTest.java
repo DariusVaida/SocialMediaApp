@@ -1,7 +1,6 @@
 package org.example.spring1.post;
 
 import org.example.project.core.SpringControllerBaseTest;
-import org.example.project.core.SpringUnitBaseTest;
 import org.example.spring1.global.SingleBodyRequestDTO;
 import org.example.spring1.photo.PhotoService;
 import org.example.spring1.post.model.Post;

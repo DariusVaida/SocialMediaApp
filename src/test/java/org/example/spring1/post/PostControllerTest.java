@@ -37,6 +37,26 @@ class PostControllerTest extends SpringControllerBaseTest {
     }
 
     @Test
+    void get() {
+
+        PostDTO postDTO = PostDTO.builder()
+                .name("name")
+                .description("description")
+                .build();
+
+        List<PostDTO> postDTOList = List.of(postDTO);
+
+        when(postService.getLikedPosts(1L)).thenReturn(postDTOList);
+
+        List<PostDTO> posts = postController.get(1L);
+
+        PostDTO result = posts.get(0);
+
+        assertEquals("name", result.getName());
+        assertEquals("description", result.getDescription());
+    }
+
+    @Test
     void findAll() {
 
 

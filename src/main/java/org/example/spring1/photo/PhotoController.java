@@ -20,21 +20,10 @@ import java.util.List;
 public class PhotoController {
 
     private final PhotoService photoService;
-    private final PostService postService;
 
     @PostMapping("/uploadFile")
     public ResponseEntity<?> uploadFile(@RequestParam("image") MultipartFile file, @RequestParam("postId") Long postId) {
 
         return photoService.handleFile(file, postId);
     }
-//
-//    @GetMapping
-//    public ResponseEntity<byte[]> getPhotos() {
-//
-//        List<Photo> photos = photoService.getAllPhotos();
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.IMAGE_JPEG)
-//                .body(photos.get(0).getData());
-//    }
 }

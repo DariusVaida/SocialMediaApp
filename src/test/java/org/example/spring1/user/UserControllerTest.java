@@ -3,7 +3,9 @@ package org.example.spring1.user;
 import org.example.project.core.SpringControllerBaseTest;
 import org.example.spring1.global.SingleBodyRequestDTO;
 import org.example.spring1.post.PostService;
+import org.example.spring1.post.model.Post;
 import org.example.spring1.user.model.User;
+import org.example.spring1.user.model.dto.LikeRequestDTO;
 import org.example.spring1.user.model.dto.UserDTO;
 import org.example.spring1.user.model.dto.UserRequestDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +34,38 @@ class UserControllerTest extends SpringControllerBaseTest {
         super.setUp();
         userController = new UserController(userService, postService);
         mvc = buildForController(userController);
+    }
+
+    @Test
+    void findLikedPosts() {
+        Long userId = 1L;
+        Post post = Post.builder().id(1L).name("Sample Post").description("Sample Description").build();
+
+        when(userService.findLikedPosts(userId)).thenReturn(List.of(post));
+
+        List<Post> likedPosts = userController.findLikedPosts(userId);
+
+        assertEquals(1, likedPosts.size());
+        assertEquals("Sample Post", likedPosts.get(0).getName());
+        verify(userService, times(1)).findLikedPosts(userId);
+    }
+
+    @Test
+    void like() {
+        Long userId = 1L;
+        Long postId = 1L;
+        Post post = Post.builder().id(postId).name("Sample Post").description("Sample Description").build();
+        LikeRequestDTO likeRequestDTO = new LikeRequestDTO(userId, postId);
+        UserDTO userDTO = UserDTO.builder().id(userId).build();
+
+        when(postService.findById(postId)).thenReturn(post);
+        when(userService.like(userId, post)).thenReturn(userDTO);
+
+        UserDTO result = userController.like(likeRequestDTO);
+
+        assertEquals(userId, result.getId());
+        verify(postService, times(1)).findById(postId);
+        verify(userService, times(1)).like(userId, post);
     }
 
     @Test

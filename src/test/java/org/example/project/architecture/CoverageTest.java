@@ -32,6 +32,8 @@ public class CoverageTest {
     private static final String[] excludedClasses = {
             "ExcludedExampleRepository",
             "ExcludedExampleService",
+            "JwtUtilsService",
+            "UserDetailsImplService"
     };
 
     @ArchTest

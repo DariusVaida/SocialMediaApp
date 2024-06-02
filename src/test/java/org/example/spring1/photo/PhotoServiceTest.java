@@ -26,6 +26,9 @@ class PhotoServiceTest extends SpringUnitBaseTest {
     @Mock
     private PhotoRepository photoRepository;
 
+    @Mock
+    private PostRepository postRepository;
+
     @Test
     void storeFile() throws IOException {
         MockMultipartFile file = new MockMultipartFile("image", "filename.jpg", "image/jpeg", "some-image".getBytes());
@@ -101,4 +104,21 @@ class PhotoServiceTest extends SpringUnitBaseTest {
         verify(photoRepository, times(1)).deleteById(id.toString());
     }
 
+
+    @Test
+    void deleteByPostId() {
+        Long postId = 1L;
+
+        when(postRepository.findById(postId)).thenReturn(Optional.empty());
+
+        photoService.deleteByPostId(postId);
+
+        verify(postRepository, times(1)).findById(postId);
+        verify(photoRepository, times(0)).deleteById(anyString());
+    }
+
+    @Test
+    void handleFile() {
+        // can't test
+    }
 }

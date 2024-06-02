@@ -29,7 +29,7 @@ class PhotoControllerTest extends SpringControllerBaseTest {
     @BeforeEach
     public void setUp() {
         super.setUp();
-        photoController = new PhotoController(photoService, postService);
+        photoController = new PhotoController(photoService);
         mvc = buildForController(photoController);
     }
 

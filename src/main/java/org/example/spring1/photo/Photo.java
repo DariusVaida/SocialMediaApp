@@ -1,6 +1,7 @@
 package org.example.spring1.photo;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
